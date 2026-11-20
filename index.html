@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141e31">
+  <meta name="description" content="MOGRINO — 모바일 게임 제작 스튜디오. Android 방치형 RPG 견습병 공식 안내.">
+  <title>MOGRINO | 게임 스튜디오</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101829; --card:#19263c; --line:#35455f; --text:#edf3fa; --muted:#a9b8cc; --accent:#eec376; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif; background:radial-gradient(ellipse at 60% 10%,#253754 0%,#101829 54%); color:var(--text); }
+    .wrap { width:min(880px,calc(100% - 40px)); margin:0 auto; }
+    header { display:flex;justify-content:space-between;align-items:center;padding:36px 0;border-bottom:1px solid var(--line); }
+    .brand { font-weight:900;letter-spacing:.16em;font-size:1.3rem; }
+    .sub { color:var(--muted);font-size:.87rem;letter-spacing:.04em; }
+    main { padding:76px 0 104px; }
+    .eyebrow { color:var(--accent); font-size:.84rem; font-weight:700; letter-spacing:.15em; }
+    h1 { margin:16px 0 14px; font-size:clamp(2.25rem,6vw,3.7rem);line-height:1.18;letter-spacing:-.05em; }
+    .intro { color:var(--muted);max-width:600px;line-height:1.9;font-size:1.05rem; }
+    .game { margin-top:46px;background:linear-gradient(120deg,rgba(34,53,80,.95),rgba(22,34,54,.95));border:1px solid var(--line);padding:30px 32px;border-radius:18px; }
+    .game small { display:block;color:var(--accent);font-weight:700;margin-bottom:10px; }
+    h2 { font-size:1.55rem;letter-spacing:-.04em;margin:0 0 12px; }
+    .game p { color:var(--muted);margin:0;line-height:1.8; }
+    .tag { display:inline-block;margin-top:18px;border:1px solid #54647a;padding:7px 11px;border-radius:100px;font-size:.82rem;color:#d9e2ef; }
+    footer { padding:26px 0 38px;border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap; }
+    a { color:#d6e5fd;text-underline-offset:4px; }
+    a:hover { color:var(--accent); }
+    @media(max-width:600px){ header{padding:25px 0;} main{padding:56px 0 72px;} .game{padding:24px;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="brand">MOGRINO</div><div class="sub">GAME STUDIO</div></header>
+    <main>
+      <div class="eyebrow">INDEPENDENT GAME STUDIO</div>
+      <h1>작은 모험을 만드는 곳.</h1>
+      <p class="intro">MOGRINO는 게임을 만드는 독립 개발 스튜디오입니다.<br>플레이어가 오래 기억할 수 있는 모험과 세계를 만들어갑니다.</p>
+      <section class="game" aria-labelledby="game-title">
+        <small>ANDROID · IDLE RPG</small>
+        <h2 id="game-title">견습병</h2>
+        <p>판타지 세계를 탐험하고 캐릭터를 성장시키는 모바일 방치형 RPG입니다.</p>
+        <span class="tag">Google Play 정식 출시 준비 중</span>
+      </section>
+    </main>
+    <footer>
+      <span class="sub">© 2026 MOGRINO. All rights reserved.</span>
+      <a href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 · Privacy Policy</a>
+    </footer>
+  </div>
+</body>
+</html>

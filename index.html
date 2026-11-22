@@ -3,50 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#141e31">
-  <meta name="description" content="MOGRINO — 모바일 게임 제작 스튜디오. Android 방치형 RPG 견습병 공식 안내.">
-  <title>MOGRINO | 게임 스튜디오</title>
-  <style>
-    :root { color-scheme: dark; --bg:#101829; --card:#19263c; --line:#35455f; --text:#edf3fa; --muted:#a9b8cc; --accent:#eec376; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif; background:radial-gradient(ellipse at 60% 10%,#253754 0%,#101829 54%); color:var(--text); }
-    .wrap { width:min(880px,calc(100% - 40px)); margin:0 auto; }
-    header { display:flex;justify-content:space-between;align-items:center;padding:36px 0;border-bottom:1px solid var(--line); }
-    .brand { font-weight:900;letter-spacing:.16em;font-size:1.3rem; }
-    .sub { color:var(--muted);font-size:.87rem;letter-spacing:.04em; }
-    main { padding:76px 0 104px; }
-    .eyebrow { color:var(--accent); font-size:.84rem; font-weight:700; letter-spacing:.15em; }
-    h1 { margin:16px 0 14px; font-size:clamp(2.25rem,6vw,3.7rem);line-height:1.18;letter-spacing:-.05em; }
-    .intro { color:var(--muted);max-width:600px;line-height:1.9;font-size:1.05rem; }
-    .game { margin-top:46px;background:linear-gradient(120deg,rgba(34,53,80,.95),rgba(22,34,54,.95));border:1px solid var(--line);padding:30px 32px;border-radius:18px; }
-    .game small { display:block;color:var(--accent);font-weight:700;margin-bottom:10px; }
-    h2 { font-size:1.55rem;letter-spacing:-.04em;margin:0 0 12px; }
-    .game p { color:var(--muted);margin:0;line-height:1.8; }
-    .tag { display:inline-block;margin-top:18px;border:1px solid #54647a;padding:7px 11px;border-radius:100px;font-size:.82rem;color:#d9e2ef; }
-    footer { padding:26px 0 38px;border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap; }
-    a { color:#d6e5fd;text-underline-offset:4px; }
-    a:hover { color:var(--accent); }
-    @media(max-width:600px){ header{padding:25px 0;} main{padding:56px 0 72px;} .game{padding:24px;} }
-  </style>
+  <meta name="theme-color" content="#090e19">
+  <meta name="description" content="《견습병》의 공지사항, 업데이트, 게임 가이드와 고객지원 안내를 확인하세요.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MOGRINO">
+  <meta property="og:title" content="MOGRINO | 견습병 공식 정보센터">
+  <meta property="og:description" content="《견습병》의 공지사항, 업데이트, 게임 가이드와 고객지원 안내를 확인하세요.">
+  <meta property="og:image" content="https://mogrino.github.io/assets/images/apprentice-art.webp">
+  <link rel="canonical" href="https://mogrino.github.io/">
+  <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="./assets/js/content.js" defer></script>
+  <script src="./assets/js/site.js" defer></script>
+  <title>MOGRINO | 견습병 공식 정보센터</title>
 </head>
-<body>
-  <div class="wrap">
-    <header><div class="brand">MOGRINO</div><div class="sub">GAME STUDIO</div></header>
-    <main>
-      <div class="eyebrow">INDEPENDENT GAME STUDIO</div>
-      <h1>작은 모험을 만드는 곳.</h1>
-      <p class="intro">MOGRINO는 게임을 만드는 독립 개발 스튜디오입니다.<br>플레이어가 오래 기억할 수 있는 모험과 세계를 만들어갑니다.</p>
-      <section class="game" aria-labelledby="game-title">
-        <small>ANDROID · IDLE RPG</small>
-        <h2 id="game-title">견습병</h2>
-        <p>판타지 세계를 탐험하고 캐릭터를 성장시키는 모바일 방치형 RPG입니다.</p>
-        <span class="tag">Google Play 정식 출시 준비 중</span>
-      </section>
-    </main>
-    <footer>
-      <span class="sub">© 2026 MOGRINO. All rights reserved.</span>
-      <a href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 · Privacy Policy</a>
-    </footer>
-  </div>
+<body data-page="home" data-root="./">
+  <a class="sr-only" href="#main-content">본문 바로가기</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./index.html" aria-label="MOGRINO 홈으로 이동">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span><span class="brand-word">MOGRINO</span><span class="brand-sub" style="display:block">OFFICIAL INFORMATION</span></span>
+      </a>
+      <nav class="nav" id="main-nav" aria-label="메인 메뉴" data-main-nav><a href="./index.html" data-nav="home">HOME</a><a href="./news/index.html" data-nav="news">NEWS</a><a href="./guide/index.html" data-nav="guide">GAME GUIDE</a><a href="./support/index.html" data-nav="support">SUPPORT</a></nav>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기">☰</button>
+    </div>
+  </header>
+  <div class="header-under"><div class="container"><span>APPRENTICE SOLDIER · OFFICIAL INFO CENTER</span><span class="status"><span class="status-dot"></span><span data-status>정식 출시 준비 중</span></span></div></div>
+  <main id="main-content" class="container">
+<section class="intro-band" aria-labelledby="home-title">
+  <div><p class="kicker">THE LATEST FROM MOGRINO</p><h1 id="home-title">가장 중요한 소식부터,<br><span class="highlight">빠르게 확인하세요.</span></h1><p class="intro-desc">《견습병》의 공지사항, 업데이트, 게임 가이드를 한곳에서 확인할 수 있습니다.</p></div>
+  <span class="meta-chip">OFFICIAL · 견습병</span>
+</section>
+<section class="home-news" aria-labelledby="latest-heading">
+  <div class="section-top"><div><h2 class="section-title" id="latest-heading">LATEST NEWS</h2><p class="section-lead">놓치지 말아야 할 새로운 소식을 모았습니다.</p></div><a class="section-link" href="news/index.html">모든 소식 보기 <span aria-hidden="true">↗</span></a></div>
+  <div class="news-grid"><div class="news-feed"><div id="home-featured"></div><div id="home-articles"></div></div>
+  <aside class="side-stack" aria-label="안내 및 바로가기"><div class="status-panel"><div class="panel-eyebrow">SERVICE STATUS</div><h3>견습병</h3><p>모바일 판타지 방치형 RPG.<br>현재 정식 출시를 준비 중이며, 일정이 확정되면 공식 NEWS에서 안내합니다.</p><div class="status-line"><span class="status-dot"></span> 정식 출시 준비 중</div></div>
+  <div class="quick-panel"><h3>빠른 이동</h3><a class="quick-link" href="news/index.html"><span>공지사항 전체보기</span><span>↗</span></a><a class="quick-link" href="guide/index.html"><span>처음 시작하기</span><span>↗</span></a><a class="quick-link" href="guide/index.html?topic=equipment"><span>장비 · 제작 · 강화</span><span>↗</span></a><a class="quick-link" href="support/index.html"><span>자주 묻는 질문</span><span>↗</span></a></div></aside></div>
+</section>
+<section class="home-guides" aria-labelledby="home-guide-title">
+ <div class="section-top"><div><h2 class="section-title" id="home-guide-title">GAME GUIDE</h2><p class="section-lead">어려운 시스템도 필요한 부분부터 찾아보세요.</p></div><a class="section-link" href="guide/index.html">전체 가이드 <span aria-hidden="true">↗</span></a></div><div class="guide-cards" id="home-guides"></div>
+</section>
+<section class="home-support" aria-label="고객지원 바로가기"><div><p class="kicker">NEED HELP?</p><h2>게임 이용에 도움이 필요하신가요?</h2><p>자주 묻는 질문과 오류 신고 안내를 SUPPORT에서 확인할 수 있습니다.</p></div><a class="btn" href="support/index.html">SUPPORT 바로가기 ↗</a></section>
+</main>
+  <footer class="site-footer"><div class="container">
+    <div class="footer-row"><div><p class="footer-brand">MOGRINO</p><p class="footer-text">《견습병》 공식 소식 · 게임 가이드 · 고객지원</p></div>
+    <div class="footer-links"><a href="./index.html">HOME</a><a href="./news/index.html">NEWS</a><a href="./guide/index.html">GAME GUIDE</a><a href="./support/index.html">SUPPORT</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> MOGRINO. All rights reserved.</span><span>본 페이지의 안내는 게임 서비스 내용에 따라 갱신될 수 있습니다.</span></div>
+  </div></footer>
+  <noscript><div style="position:fixed;bottom:0;left:0;right:0;background:#d3ac67;color:#132033;padding:15px;text-align:center;z-index:60">이 홈페이지의 소식과 가이드를 보려면 JavaScript가 필요합니다.</div></noscript>
 </body>
 </html>

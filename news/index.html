@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e19">
-  <meta name="description" content="《견습병》 공식 공지사항, 패치노트, 이벤트 및 개발 소식.">
+  <meta name="description" content="《견습병》 공식 공지사항. 게임 업데이트, 이벤트, 운영 소식을 한곳에서 확인하세요.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MOGRINO">
-  <meta property="og:title" content="NEWS | MOGRINO">
-  <meta property="og:description" content="《견습병》 공식 공지사항, 패치노트, 이벤트 및 개발 소식.">
+  <meta property="og:title" content="공지사항 | MOGRINO">
+  <meta property="og:description" content="《견습병》 공식 공지사항. 게임 업데이트, 이벤트, 운영 소식을 한곳에서 확인하세요.">
   <meta property="og:image" content="https://mogrino.github.io/assets/images/apprentice-art.webp">
   <link rel="canonical" href="https://mogrino.github.io/news/">
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-  <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
-  <script src="../assets/js/content.js" defer></script>
-  <script src="../assets/js/site.js" defer></script>
-  <title>NEWS | MOGRINO</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=1.2">
+  <script src="../assets/js/content.js?v=1.2" defer></script>
+  <script src="../assets/js/site.js?v=1.2" defer></script>
+  <title>공지사항 | MOGRINO</title>
 </head>
 <body data-page="news" data-root="../">
   <a class="sr-only" href="#main-content">본문 바로가기</a>
@@ -24,20 +24,20 @@
       <a class="brand" href="../index.html" aria-label="MOGRINO 홈으로 이동">
         <img class="brand-logo" src="../assets/images/mogrino-logo.png" alt="MOGRINO" width="800" height="200">
       </a>
-      <nav class="nav" id="main-nav" aria-label="메인 메뉴" data-main-nav><a href="../index.html" data-nav="home">HOME</a><a href="../news/index.html" data-nav="news">NEWS</a><a href="../guide/index.html" data-nav="guide">GAME GUIDE</a><a href="../support/index.html" data-nav="support">SUPPORT</a></nav>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기">☰</button>
+      <nav class="nav" id="main-nav" aria-label="전체 메뉴" data-main-nav><a href="../index.html" data-nav="home">홈</a><a href="../news/index.html" data-nav="news">공지사항</a><a href="../guide/index.html" data-nav="guide">가이드</a><a href="../bug/index.html" data-nav="bug">버그신고</a><a href="../suggestions/index.html" data-nav="suggestions">건의사항</a></nav>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기"><svg class="menu-symbol" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="menu-button-label">메뉴</span></button>
     </div>
   </header>
   <div class="header-under"><div class="container"><span>APPRENTICE SOLDIER · OFFICIAL INFO CENTER</span><span class="status"><span class="status-dot"></span><span data-status>정식 출시 준비 중</span></span></div></div>
   <main id="main-content" class="container">
-<div id="news-list-view"><div class="page-title"><p class="kicker">MOGRINO NEWSROOM</p><h1>NEWS</h1><p>게임 공지, 업데이트 내역, 이벤트 및 개발 소식을 확인하세요. 실제 배포 여부가 확정된 내용만 안내합니다.</p></div>
-<div class="toolbar"><div class="filters" id="news-filters" role="group" aria-label="뉴스 분류"></div><div class="search-wrap"><label class="sr-only" for="news-search">소식 검색</label><input class="search" id="news-search" placeholder="소식 검색" type="search" autocomplete="off"></div></div>
-<div class="section-top"><p class="section-lead">검색 결과 <strong id="news-count">0</strong>건</p></div><div id="news-list"></div></div>
-<div id="news-detail-view" hidden><div class="page-title"><p class="kicker">MOGRINO NEWSROOM</p></div><div id="news-detail"></div></div>
+<div id="news-list-view"><div class="page-title"><p class="kicker">MOGRINO · OFFICIAL NOTICE</p><h1>공지사항</h1><p>업데이트, 이벤트, 운영 안내 등 모든 공식 소식을 이곳에서 확인하세요.</p></div>
+<div class="toolbar"><div class="search-wrap"><label class="sr-only" for="news-search">공지 검색</label><input class="search" id="news-search" placeholder="공지 검색" type="search" autocomplete="off"></div></div>
+<div class="section-top"><p class="section-lead">공지 <strong id="news-count">0</strong>건</p></div><div id="news-list"></div></div>
+<div id="news-detail-view" hidden><div class="page-title"><p class="kicker">MOGRINO · OFFICIAL NOTICE</p></div><div id="news-detail"></div></div>
 </main>
   <footer class="site-footer"><div class="container">
     <div class="footer-row"><div><p class="footer-brand">MOGRINO</p><p class="footer-text">《견습병》 공식 소식 · 게임 가이드 · 고객지원</p></div>
-    <div class="footer-links"><a href="../index.html">HOME</a><a href="../news/index.html">NEWS</a><a href="../guide/index.html">GAME GUIDE</a><a href="../support/index.html">SUPPORT</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div>
+    <div class="footer-links"><a href="../index.html">홈</a><a href="../news/index.html">공지사항</a><a href="../guide/index.html">가이드</a><a href="../bug/index.html">버그신고</a><a href="../suggestions/index.html">건의사항</a><a href="../support/index.html">FAQ</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div>
     <div class="footer-bottom"><span>© <span data-year>2026</span> MOGRINO. All rights reserved.</span><span>본 페이지의 안내는 게임 서비스 내용에 따라 갱신될 수 있습니다.</span></div>
   </div></footer>
   <noscript><div style="position:fixed;bottom:0;left:0;right:0;background:#d3ac67;color:#132033;padding:15px;text-align:center;z-index:60">이 홈페이지의 소식과 가이드를 보려면 JavaScript가 필요합니다.</div></noscript>

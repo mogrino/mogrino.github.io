@@ -8,8 +8,8 @@ const $=(sel)=>document.querySelector(sel);
 const esc=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dest=(t,id)=>root+(t==='news'?'news/index.html'+(id?'?id='+encodeURIComponent(id):''):'guide/index.html'+(id?'?topic='+encodeURIComponent(id):''));
 const formattedDate=(s)=>s.replaceAll('-','.');
-const catName=(s)=>d.categories[s]?.label||s;
-const catClass=(s)=>s==='NOTICE'?'':s==='UPDATE'?'blue':s==='EVENT'?'teal':'muted';
+const catName=(s)=>'공지';
+const catClass=(s)=>'';
 const badge=(c)=>`<span class="pill ${catClass(c)}">${esc(catName(c))}</span>`;
 const recent=[...d.news].sort((a,b)=>b.date.localeCompare(a.date));
 const featured=recent.find(n=>n.pinned)||recent[0];
@@ -24,12 +24,13 @@ document.querySelectorAll('[data-nav]').forEach(el=>{
  if(active){el.classList.add('active');el.setAttribute('aria-current','page');}
 });
 const navToggle=$('[data-nav-toggle]');const nav=$('[data-main-nav]');
-function closeNav(){nav?.classList.remove('open');navToggle?.setAttribute('aria-expanded','false')}
+function closeNav(){nav?.classList.remove('open');navToggle?.setAttribute('aria-expanded','false');navToggle?.setAttribute('aria-label','메뉴 열기');}
 navToggle?.addEventListener('click',()=>{
- const yes=nav.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(yes));
+ const yes=nav.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(yes));navToggle.setAttribute('aria-label',yes?'메뉴 닫기':'메뉴 열기');
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
 nav?.addEventListener('click',e=>{if(e.target.closest('a'))closeNav()});
+document.addEventListener('pointerdown',e=>{if(nav?.classList.contains('open')&&!nav.contains(e.target)&&!navToggle?.contains(e.target))closeNav();});
 
 function renderHome(){
  const f=$('#home-featured');
@@ -39,7 +40,7 @@ function renderHome(){
  </a>`;
  const list=$('#home-articles');
  if(list) list.innerHTML=articles.length?articles.slice(0,3).map(n=>`<a class="news-card" href="${dest('news',n.id)}"><div><div class="smallrow">${badge(n.category)}<span class="date">${formattedDate(n.date)}</span></div><h3>${esc(n.title)}</h3><p>${esc(n.excerpt)}</p></div><span class="arrow" aria-hidden="true">↗</span></a>`).join(''):
- `<div class="news-card"><div><h3>새로운 소식을 준비하고 있습니다.</h3><p>추가 공지는 NEWS 메뉴에서 확인할 수 있습니다.</p></div></div>`;
+ `<div class="news-card"><div><h3>새로운 소식을 준비하고 있습니다.</h3><p>추가 공지는 공지사항 메뉴에서 확인할 수 있습니다.</p></div></div>`;
  const guide=$('#home-guides');
  if(guide)guide.innerHTML=d.guides.slice(0,4).map(g=>`<a class="guide-card" href="${dest('guide',g.id)}"><div class="guide-no">GUIDE ${esc(g.number)}</div><div class="guide-symbol">${icon(g.icon)}</div><h3>${esc(g.title)}</h3><p>${esc(g.subtitle)}</p></a>`).join('');
 }
@@ -52,39 +53,30 @@ function renderNews(){
  const matched=recent.find(x=>x.id===id);
  if(matched){
   $('#news-list-view').hidden=true;$('#news-detail-view').hidden=false;
-  document.title=matched.title+' | MOGRINO NEWS';
+  document.title=matched.title+' | MOGRINO 공지사항';
   const p=$('#news-detail');
-  p.innerHTML=`<div class="breadcrumbs"><a href="${root}index.html">HOME</a> / <a href="${root}news/index.html">NEWS</a> / ${esc(matched.title)}</div>
+  p.innerHTML=`<div class="breadcrumbs"><a href="${root}index.html">HOME</a> / <a href="${root}news/index.html">공지사항</a> / ${esc(matched.title)}</div>
     <div class="article-layout"><article class="article-body"><div class="smallrow">${badge(matched.category)} <span class="date">${formattedDate(matched.date)}</span></div>
     <h1>${esc(matched.title)}</h1><p class="intro-text">${esc(matched.excerpt)}</p>
     ${matched.body.map(block=>`<section><h2>${esc(block.heading)}</h2><p>${esc(block.text)}</p></section>`).join('')}
-    <a class="backlink" href="${root}news/index.html">← 전체 소식으로 돌아가기</a></article>
-    <aside class="article-aside"><h3>다른 소식</h3>${recent.filter(n=>n!==matched).slice(0,4).map(n=>`<a href="${dest('news',n.id)}">${esc(n.title)} ↗</a>`).join('')}<a href="${root}guide/index.html">게임 가이드 보기 ↗</a></aside></div>`;
+    <a class="backlink" href="${root}news/index.html">← 전체 공지로 돌아가기</a></article>
+    <aside class="article-aside"><h3>다른 공지</h3>${recent.filter(n=>n!==matched).slice(0,4).map(n=>`<a href="${dest('news',n.id)}">${esc(n.title)} ↗</a>`).join('')}<a href="${root}guide/index.html">게임 가이드 보기 ↗</a></aside></div>`;
   return;
  }
- let current='ALL';
- const filters=$('#news-filters');const list=$('#news-list');const search=$('#news-search');
- const filterData=[['ALL','전체'],...Object.entries(d.categories).map(([k,v])=>[k,v.label])];
- filters.innerHTML=filterData.map(([k,v])=>`<button class="filter ${current===k?'active':''}" data-filter="${esc(k)}" type="button" aria-pressed="${current===k}">${esc(v)}</button>`).join('');
+ const list=$('#news-list');const search=$('#news-search');
  function update(){
   const q=(search.value||'').trim().toLocaleLowerCase();
-  const matches=recent.filter(n=>(current==='ALL'||n.category===current)&&(!q||(n.title+' '+n.excerpt+' '+n.body.map(x=>x.text).join(' ')).toLocaleLowerCase().includes(q)));
-  list.innerHTML=matches.length?`<div class="article-list">${matches.map(n=>`<a class="article-row" href="${dest('news',n.id)}"><div><div class="smallrow">${badge(n.category)} <span class="date">${formattedDate(n.date)}</span>${n.pinned?'<span class="date">📌 중요</span>':''}</div><h3>${esc(n.title)}</h3><p>${esc(n.excerpt)}</p></div><span class="arrow" aria-hidden="true">↗</span></a>`).join('')}</div>`:'<div class="empty">해당 조건의 소식이 아직 없습니다.<br>다른 분류를 선택하거나 검색어를 변경해 주세요.</div>';
+  const matches=recent.filter(n=>(!q||(n.title+' '+n.excerpt+' '+n.body.map(x=>x.text).join(' ')).toLocaleLowerCase().includes(q)));
+  list.innerHTML=matches.length?`<div class="article-list">${matches.map(n=>`<a class="article-row" href="${dest('news',n.id)}"><div><div class="smallrow">${badge(n.category)} <span class="date">${formattedDate(n.date)}</span>${n.pinned?'<span class="date">📌 중요</span>':''}</div><h3>${esc(n.title)}</h3><p>${esc(n.excerpt)}</p></div><span class="arrow" aria-hidden="true">↗</span></a>`).join('')}</div>`:'<div class="empty">해당 검색어에 맞는 공지가 없습니다.<br>검색어를 변경해 주세요.</div>';
   $('#news-count').textContent=String(matches.length);
  }
- filters.addEventListener('click',ev=>{
-  const btn=ev.target.closest('[data-filter]');if(!btn)return;
-  current=btn.dataset.filter;
-  filters.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn));});
-  update();
- });
  search.addEventListener('input',update);
  update();
 }
 function renderGuide(){
  const topic=new URLSearchParams(location.search).get('topic');
  const current=d.guides.find(g=>g.id===topic);
- $('#guide-menu').innerHTML='<div class="menu-title">GAME GUIDE</div>'+d.guides.map(g=>`<a ${g===current?'class="active" aria-current="page"':''} href="${dest('guide',g.id)}"><span class="num">${esc(g.number)}</span> ${esc(g.title)}</a>`).join('');
+ $('#guide-menu').innerHTML='<div class="menu-title">가이드 목차</div>'+d.guides.map(g=>`<a ${g===current?'class="active" aria-current="page"':''} href="${dest('guide',g.id)}"><span class="num">${esc(g.number)}</span> ${esc(g.title)}</a>`).join('');
  const main=$('#guide-main');
  if(current){
   document.title=current.title+' | MOGRINO GAME GUIDE';
@@ -96,7 +88,7 @@ function renderGuide(){
  }else{
   main.innerHTML=`<div class="guide-hero"><img class="guide-hero-media" src="${root}assets/images/apprentice-art.webp" alt="견습병 일러스트"><div class="guide-hero-body"><span class="date">START HERE</span><h2>궁금한 시스템부터 찾아보세요.</h2><p>처음 시작하기부터 장비와 제작, 변신, 지역 공략까지. 원하는 항목을 선택하면 자세한 안내를 볼 수 있습니다.</p></div></div>
    <div class="guide-index">${d.guides.map(g=>`<a class="guide-index-card" href="${dest('guide',g.id)}"><span class="num">${esc(g.number)}</span><div><h3>${esc(g.title)} ↗</h3><p>${esc(g.subtitle)}</p></div></a>`).join('')}</div>
-   <div class="notice-note">현재 페이지는 게임 가이드 첫 버전입니다. 실제 출시 이후 변경 사항은 NEWS의 패치노트와 함께 업데이트할 예정입니다.</div>`;
+   <div class="notice-note">현재 페이지는 게임 가이드 첫 버전입니다. 실제 출시 이후 변경 사항은 공지사항의 패치노트와 함께 업데이트할 예정입니다.</div>`;
  }
 }
 function renderSupport(){
@@ -115,8 +107,45 @@ function renderSupport(){
   }catch(e){status.textContent='브라우저의 복사 기능이 제한되어 있습니다. 문의 내용을 직접 작성해 주세요.'}
  });
 }
+
+async function copyText(v){
+ if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);return;}
+ const ta=document.createElement('textarea');ta.value=v;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+ try{if(!document.execCommand('copy'))throw new Error('copy failed');}finally{ta.remove();}
+}
+function renderFeedback(){
+ const form=$('#feedback-form');if(!form)return;
+ const kind=form.dataset.feedbackKind;const message=$('#feedback-message');const email=$('#feedback-email');
+ const title=kind==='bug'?'버그신고':'건의사항';
+ function buildMessage(){
+  const data=new FormData(form);const lines=['[MOGRINO 견습병 '+title+']','제목: '+String(data.get('title')||'').trim()];
+  if(kind==='bug'){
+    lines.push('게임 버전: '+String(data.get('version')||'').trim());
+    lines.push('기기 모델: '+String(data.get('device')||'').trim());
+    lines.push('오류 발생 순서: '+String(data.get('steps')||'').trim());
+  }else{lines.push('건의 분야: '+String(data.get('area')||'').trim());}
+  lines.push('상세 내용: '+String(data.get('body')||'').trim());
+  return lines.join('\n');
+ }
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();if(!form.reportValidity())return;
+  try{await copyText(buildMessage());message.textContent='내용을 복사했습니다. 아직 자동 제출된 것은 아닙니다. 공식 접수 채널이 연결되면 이 내용을 붙여넣어 보내 주세요.';message.classList.add('success');}
+  catch(err){message.textContent='자동 복사에 실패했습니다. 입력 내용을 직접 선택해 복사해 주세요.';message.classList.remove('success');}
+ });
+ if(email&&d.config.supportEmail){
+  email.hidden=false;
+  email.addEventListener('click',e=>{
+   if(!form.reportValidity()){e.preventDefault();return;}
+   const subject='[견습병 '+title+'] '+String(new FormData(form).get('title')||'').trim();
+   email.href='mailto:'+encodeURIComponent(d.config.supportEmail)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(buildMessage());
+  });
+  message.textContent='작성 내용을 복사하거나, 공식 문의 이메일로 보낼 수 있습니다. 이메일 전송은 메일 앱에서 직접 완료해야 합니다.';
+ }
+}
+
 if(page==='home')renderHome();
 if(page==='news')renderNews();
 if(page==='guide')renderGuide();
 if(page==='support')renderSupport();
+if(page==='bug'||page==='suggestions')renderFeedback();
 })();

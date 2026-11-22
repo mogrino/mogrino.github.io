@@ -12,9 +12,9 @@
   <meta property="og:image" content="https://mogrino.github.io/assets/images/apprentice-art.webp">
   <link rel="canonical" href="https://mogrino.github.io/">
   <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
-  <link rel="stylesheet" href="./assets/css/style.css?v=1.1">
-  <script src="./assets/js/content.js" defer></script>
-  <script src="./assets/js/site.js" defer></script>
+  <link rel="stylesheet" href="./assets/css/style.css?v=1.2">
+  <script src="./assets/js/content.js?v=1.2" defer></script>
+  <script src="./assets/js/site.js?v=1.2" defer></script>
   <title>MOGRINO | 견습병 공식 정보센터</title>
 </head>
 <body data-page="home" data-root="./">
@@ -24,30 +24,44 @@
       <a class="brand" href="./index.html" aria-label="MOGRINO 홈으로 이동">
         <img class="brand-logo" src="./assets/images/mogrino-logo.png" alt="MOGRINO" width="800" height="200">
       </a>
-      <nav class="nav" id="main-nav" aria-label="메인 메뉴" data-main-nav><a href="./index.html" data-nav="home">HOME</a><a href="./news/index.html" data-nav="news">NEWS</a><a href="./guide/index.html" data-nav="guide">GAME GUIDE</a><a href="./support/index.html" data-nav="support">SUPPORT</a></nav>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기">☰</button>
+      <nav class="nav" id="main-nav" aria-label="전체 메뉴" data-main-nav><a href="./index.html" data-nav="home">홈</a><a href="./news/index.html" data-nav="news">공지사항</a><a href="./guide/index.html" data-nav="guide">가이드</a><a href="./bug/index.html" data-nav="bug">버그신고</a><a href="./suggestions/index.html" data-nav="suggestions">건의사항</a></nav>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="메뉴 열기"><svg class="menu-symbol" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="menu-button-label">메뉴</span></button>
     </div>
   </header>
   <div class="header-under"><div class="container"><span>APPRENTICE SOLDIER · OFFICIAL INFO CENTER</span><span class="status"><span class="status-dot"></span><span data-status>정식 출시 준비 중</span></span></div></div>
   <main id="main-content" class="container">
-<section class="intro-band" aria-labelledby="home-title">
-  <div><p class="kicker">THE LATEST FROM MOGRINO</p><h1 id="home-title">가장 중요한 소식부터,<br><span class="highlight">빠르게 확인하세요.</span></h1><p class="intro-desc">《견습병》의 공지사항, 업데이트, 게임 가이드를 한곳에서 확인할 수 있습니다.</p></div>
-  <span class="meta-chip">OFFICIAL · 견습병</span>
-</section>
-<section class="home-news" aria-labelledby="latest-heading">
-  <div class="section-top"><div><h2 class="section-title" id="latest-heading">LATEST NEWS</h2><p class="section-lead">놓치지 말아야 할 새로운 소식을 모았습니다.</p></div><a class="section-link" href="news/index.html">모든 소식 보기 <span aria-hidden="true">↗</span></a></div>
-  <div class="news-grid"><div class="news-feed"><div id="home-featured"></div><div id="home-articles"></div></div>
-  <aside class="side-stack" aria-label="안내 및 바로가기"><div class="status-panel"><div class="panel-eyebrow">SERVICE STATUS</div><h3>견습병</h3><p>모바일 판타지 방치형 RPG.<br>현재 정식 출시를 준비 중이며, 일정이 확정되면 공식 NEWS에서 안내합니다.</p><div class="status-line"><span class="status-dot"></span> 정식 출시 준비 중</div></div>
-  <div class="quick-panel"><h3>빠른 이동</h3><a class="quick-link" href="news/index.html"><span>공지사항 전체보기</span><span>↗</span></a><a class="quick-link" href="guide/index.html"><span>처음 시작하기</span><span>↗</span></a><a class="quick-link" href="guide/index.html?topic=equipment"><span>장비 · 제작 · 강화</span><span>↗</span></a><a class="quick-link" href="support/index.html"><span>자주 묻는 질문</span><span>↗</span></a></div></aside></div>
-</section>
-<section class="home-guides" aria-labelledby="home-guide-title">
- <div class="section-top"><div><h2 class="section-title" id="home-guide-title">GAME GUIDE</h2><p class="section-lead">어려운 시스템도 필요한 부분부터 찾아보세요.</p></div><a class="section-link" href="guide/index.html">전체 가이드 <span aria-hidden="true">↗</span></a></div><div class="guide-cards" id="home-guides"></div>
-</section>
-<section class="home-support" aria-label="고객지원 바로가기"><div><p class="kicker">NEED HELP?</p><h2>게임 이용에 도움이 필요하신가요?</h2><p>자주 묻는 질문과 오류 신고 안내를 SUPPORT에서 확인할 수 있습니다.</p></div><a class="btn" href="support/index.html">SUPPORT 바로가기 ↗</a></section>
+  <section class="notice-welcome" aria-labelledby="home-title">
+    <p class="kicker">MOGRINO · APPRENTICE SOLDIER</p>
+    <h1 id="home-title">견습병 <span class="highlight">공식 소식</span></h1>
+    <p>게임 공지, 패치노트, 이벤트 및 중요한 운영 안내를 가장 먼저 확인하세요.</p>
+  </section>
+  <section class="home-news notice-primary" aria-labelledby="latest-heading">
+    <div class="section-top">
+      <div><p class="kicker">OFFICIAL NOTICE</p><h2 class="section-title" id="latest-heading">공지사항</h2><p class="section-lead">모든 업데이트와 이벤트 소식은 공지사항에서 안내합니다.</p></div>
+      <a class="section-link" href="./news/index.html">전체 공지 보기 <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="notice-layout">
+      <div class="news-feed" aria-label="최근 공지"><div id="home-featured"></div><div id="home-articles"></div></div>
+      <aside class="notice-side" aria-label="서비스 안내">
+        <div class="side-label"><span class="status-dot"></span> OFFICIAL CHANNEL</div>
+        <h3>꼭 필요한 안내를<br>한곳에서.</h3>
+        <p>업데이트, 이벤트, 운영 공지와 알려진 문제까지. 새로운 내용은 이곳에 먼저 정리합니다.</p>
+        <div class="notice-side-bottom"><span>《견습병》 운영 현황</span><strong data-status>정식 출시 준비 중</strong></div>
+      </aside>
+    </div>
+  </section>
+  <section class="home-entry" aria-labelledby="home-entry-title">
+    <div class="section-top"><div><p class="kicker">QUICK ACCESS</p><h2 class="section-title" id="home-entry-title">게임 이용 안내</h2><p class="section-lead">가이드를 확인하거나 의견을 남길 준비를 할 수 있습니다.</p></div></div>
+    <div class="home-entry-grid">
+      <a class="entry-card entry-guide" href="./guide/index.html"><span class="entry-index">02 · GAME GUIDE</span><span class="entry-icon" aria-hidden="true">▤</span><h3>가이드</h3><p>성장·장비·펫·변신 등 게임 시스템을 쉽게 찾아보세요.</p><span class="entry-link">가이드 열기 <b aria-hidden="true">↗</b></span></a>
+      <a class="entry-card entry-bug" href="./bug/index.html"><span class="entry-index">03 · BUG REPORT</span><span class="entry-icon" aria-hidden="true">⌁</span><h3>버그신고</h3><p>게임 오류를 발견했다면 발생 상황과 재현 방법을 정리하세요.</p><span class="entry-link">버그 신고 안내 <b aria-hidden="true">↗</b></span></a>
+      <a class="entry-card entry-idea" href="./suggestions/index.html"><span class="entry-index">04 · SUGGESTIONS</span><span class="entry-icon" aria-hidden="true">✧</span><h3>건의사항</h3><p>더 나은 견습병을 위한 개선 의견과 새로운 아이디어를 남겨주세요.</p><span class="entry-link">건의사항 안내 <b aria-hidden="true">↗</b></span></a>
+    </div>
+  </section>
 </main>
   <footer class="site-footer"><div class="container">
     <div class="footer-row"><div><p class="footer-brand">MOGRINO</p><p class="footer-text">《견습병》 공식 소식 · 게임 가이드 · 고객지원</p></div>
-    <div class="footer-links"><a href="./index.html">HOME</a><a href="./news/index.html">NEWS</a><a href="./guide/index.html">GAME GUIDE</a><a href="./support/index.html">SUPPORT</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div>
+    <div class="footer-links"><a href="./index.html">홈</a><a href="./news/index.html">공지사항</a><a href="./guide/index.html">가이드</a><a href="./bug/index.html">버그신고</a><a href="./suggestions/index.html">건의사항</a><a href="./support/index.html">FAQ</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div>
     <div class="footer-bottom"><span>© <span data-year>2026</span> MOGRINO. All rights reserved.</span><span>본 페이지의 안내는 게임 서비스 내용에 따라 갱신될 수 있습니다.</span></div>
   </div></footer>
   <noscript><div style="position:fixed;bottom:0;left:0;right:0;background:#d3ac67;color:#132033;padding:15px;text-align:center;z-index:60">이 홈페이지의 소식과 가이드를 보려면 JavaScript가 필요합니다.</div></noscript>

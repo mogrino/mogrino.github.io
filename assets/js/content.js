@@ -94,3 +94,42 @@ window.MOGRINO_CONTENT = {
     { q:'업적과 순위는 어디에서 확인하나요?', a:'Google Play Games 연동을 사용하는 업적과 최고 레벨 리더보드는 게임 내 해당 메뉴에서 확인할 수 있도록 준비 중입니다.' }
   ]
 };
+
+/*
+ * MOGRINO 공지사항 공개 페이지 자동 연결
+ * - 기존 content.js와 가이드/FAQ를 보존합니다.
+ * - /news/에서만 Firebase 공개 공지판을 표시합니다.
+ * - 이 파일은 위 content.js를 이미 불러오는 기존 news/index.html에 추가 편집 없이 적용됩니다.
+ * - 관리자 /admin/ 및 버그/건의 폼은 수정하지 않습니다.
+ * - 모듈 실행 전에 Firebase 프로젝트 설정을 반드시 먼저 불러옵니다.
+ */
+(function connectMogrinoPublicNews() {
+  var path = window.location.pathname.replace(/index\.html$/i, '').replace(/\/+$/, '');
+  if (path !== '/news' || window.__MOGRINO_NEWS_PUBLIC_LOADER__) return;
+  window.__MOGRINO_NEWS_PUBLIC_LOADER__ = true;
+
+  // 이미 v2 패치를 업로드한 상태를 전제로 CSS, 설정, 공개 스크립트를 연결합니다.
+  var css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = '/assets/css/mogrino-news-board.css?v=20261123-2';
+  css.setAttribute('data-mogrino-news-board', '');
+  document.head.appendChild(css);
+
+  // Firebase 설정 스크립트를 읽은 *후에* 공개 게시판 모듈을 불러와야 합니다.
+  var config = document.createElement('script');
+  config.src = '/assets/js/mogrino-firebase-config.js?v=20261123-2';
+  config.onload = function () {
+    var board = document.createElement('script');
+    board.type = 'module';
+    board.src = '/assets/js/mogrino-news-public.js?v=20261123-2';
+    board.setAttribute('data-mogrino-news-board', '');
+    board.onerror = function () {
+      console.error('[MOGRINO] Firebase 공개 게시판 스크립트를 불러오지 못했습니다.');
+    };
+    document.head.appendChild(board);
+  };
+  config.onerror = function () {
+    console.error('[MOGRINO] Firebase 연결 설정 파일을 불러오지 못했습니다.');
+  };
+  document.head.appendChild(config);
+})();

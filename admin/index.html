@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#090e19">
+  <title>MOGRINO | 공지 관리자</title>
+  <link rel="stylesheet" href="/assets/css/mogrino-news-board.css?v=20261123-2">
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <a class="admin-brand" href="/">MOGRINO</a>
+    <nav><a href="/news/">공지사항 보기 ↗</a> · <a href="/">홈페이지</a></nav>
+  </header>
+  <main class="admin-main">
+    <div class="admin-heading">
+      <span class="board-eyebrow">MOGRINO STUDIO / CONTENT MANAGEMENT</span>
+      <h1>공지사항 관리</h1>
+      <p>운영자만 글을 작성·수정·삭제할 수 있습니다. 방문자는 게시된 글만 읽습니다.</p>
+    </div>
+    <section id="login-box" class="admin-panel" aria-label="관리자 로그인">
+      <h2>관리자 로그인</h2>
+      <p class="board-muted">Firebase에 등록한 운영자 이메일과 비밀번호를 입력하세요.</p>
+      <form id="login-form">
+        <label>이메일<input id="login-email" type="email" autocomplete="username" required></label>
+        <label>비밀번호<input id="login-password" type="password" autocomplete="current-password" required></label>
+        <button id="login-button" type="submit" class="btn btn-primary">로그인</button>
+      </form>
+      <p id="login-message" class="board-message" aria-live="polite"></p>
+    </section>
+    <div id="dashboard" hidden>
+      <div class="admin-toolbar">
+        <p><b>로그인:</b> <span id="signed-user"></span></p>
+        <button id="logout-button" class="btn btn-subtle" type="button">로그아웃</button>
+      </div>
+      <section class="admin-panel" aria-labelledby="editor-title">
+        <h2 id="editor-title">새 공지 작성</h2>
+        <form id="post-form">
+          <div class="admin-grid">
+            <label>제목 <span class="required">*</span><input id="post-title" name="title" type="text" required maxlength="120" placeholder="예: 《견습병》 v1.0.23 업데이트 안내"></label>
+            <label>분류<select id="post-category" name="category"><option value="NOTICE">공지</option><option value="UPDATE">업데이트</option><option value="EVENT">이벤트</option><option value="DEV">개발 소식</option></select></label>
+            <label>게시 날짜 <span class="required">*</span><input id="post-date" name="date" type="date" required></label>
+            <label>게시 상태<select id="post-status" name="status"><option value="draft">임시저장 (비공개)</option><option value="published">게시 (전체 공개)</option></select></label>
+          </div>
+          <label>목록에 보일 요약 <small>(비워두면 본문 첫 부분 사용)</small><textarea id="post-excerpt" name="excerpt" rows="2" maxlength="300" placeholder="공지 목록에 표시되는 짧은 설명"></textarea></label>
+          <label>본문 <span class="required">*</span><textarea id="post-body" name="body" rows="12" maxlength="20000" required placeholder="공지사항 내용을 작성하세요. 줄바꿈은 게시글에서 그대로 유지됩니다."></textarea></label>
+          <label class="admin-checkbox"><input id="post-pinned" type="checkbox"> 중요 공지로 상단 고정</label>
+          <div class="admin-actions">
+            <button class="btn btn-primary" type="submit" id="save-post">새 글 저장</button>
+            <button class="btn btn-subtle" type="button" id="preview-post">미리보기</button>
+            <button class="btn btn-subtle" type="button" id="reset-editor">새 글 작성</button>
+          </div>
+        </form>
+        <p id="admin-message" class="board-message" aria-live="polite"></p>
+        <div id="preview-panel" class="admin-preview" hidden>
+          <h3>미리보기 (저장 전 확인)</h3>
+          <h4 id="preview-title"></h4>
+          <div class="mogrino-board__body" id="preview-body"></div>
+        </div>
+      </section>
+      <section class="admin-panel" aria-label="기존 게시물 관리">
+        <h2>작성한 공지사항</h2>
+        <div id="post-list" class="admin-list" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+  <footer class="admin-footer">MOGRINO · 공식 공지 관리 화면 (보안은 Firestore 규칙으로 제어)</footer>
+  <script src="/assets/js/mogrino-firebase-config.js?v=20261123-2"></script>
+  <script type="module" src="/assets/js/mogrino-news-admin.js?v=20261123-2"></script>
+</body>
+</html>

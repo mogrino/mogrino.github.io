@@ -1,0 +1,65 @@
+/* MOGRINO 관리자 및 공개 공지 패널. 접두어로 기존 사이트 CSS와 충돌 방지 */
+:root { --m-bg:#090e19; --m-panel:#131d2e; --m-border:#344158; --m-text:#edf2f7; --m-muted:#a3b2c6; --m-accent:#e5be75; }
+[hidden]{display:none!important}
+.admin-body { margin:0; min-height:100vh; background:var(--m-bg); color:var(--m-text); font:16px/1.65 system-ui,-apple-system,"Malgun Gothic",sans-serif; }
+.admin-body * { box-sizing:border-box; }
+.admin-header { border-bottom:1px solid var(--m-border); min-height:72px; padding:18px max(18px,calc((100vw - 1020px)/2)); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+.admin-brand { font-size:1.35rem; font-weight:900; letter-spacing:.16em; color:var(--m-accent)!important; text-decoration:none; }
+.admin-header nav { font-size:.92rem; color:var(--m-muted); }
+.admin-header nav a { color:inherit; text-decoration:none; }
+.admin-header nav a:hover,.admin-header nav a:focus-visible { color:var(--m-accent); }
+.admin-main { width:min(100% - 32px,1000px); margin:32px auto 70px; }
+.admin-heading { margin-bottom:26px; }
+.board-eyebrow,.mogrino-board__kicker { color:var(--m-accent); font-size:.75rem; letter-spacing:.1em; font-weight:800; }
+.admin-heading h1 { margin:6px 0 0; font-size:clamp(1.8rem,4vw,2.4rem); }
+.admin-heading p,.board-muted { color:var(--m-muted); }
+.admin-panel { border:1px solid var(--m-border); border-radius:16px; background:var(--m-panel); padding:clamp(18px,3.5vw,30px); margin-bottom:24px; box-shadow:0 7px 22px rgba(0,0,0,.12); }
+.admin-panel h2 { margin:0 0 15px; font-size:1.25rem; }
+.admin-panel form label { display:block; margin-bottom:16px; font-weight:700; }
+.admin-panel label small { font-weight:400; color:var(--m-muted); }
+.admin-panel input:not([type=checkbox]),.admin-panel select,.admin-panel textarea { display:block; width:100%; font:inherit; font-weight:400; color:var(--m-text); background:#0e1624; border:1px solid #46546c; border-radius:8px; padding:12px 13px; margin-top:7px; outline-offset:3px; }
+.admin-panel select { color-scheme:dark; }
+.admin-panel input:focus,.admin-panel textarea:focus,.admin-panel select:focus { outline:2px solid var(--m-accent); outline-offset:1px; }
+.admin-panel textarea { resize:vertical; }
+.admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; }
+.admin-checkbox { display:flex!important; align-items:center; gap:10px; }
+.admin-checkbox input { width:18px; height:18px; accent-color:var(--m-accent); }
+.required { color:#ffe099; }
+.admin-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.btn { display:inline-flex; justify-content:center; align-items:center; padding:9px 15px; border:1px solid var(--m-border); border-radius:9px; cursor:pointer; font:inherit; font-size:.91rem; font-weight:700; text-decoration:none; transition:filter .12s; }
+.btn:hover { filter:brightness(1.12); }
+.btn:disabled { opacity:.6; cursor:wait; }
+.btn-primary { background:var(--m-accent); border-color:var(--m-accent); color:#18212f; }
+.btn-subtle { background:#1b293e; color:var(--m-text); }
+.btn-danger { background:#40252b; color:#ffe8ea; border-color:#7e484d; }
+.board-message { margin:12px 0 0; min-height:24px; }
+.board-message[data-kind=error] { color:#ffabab; }
+.board-message[data-kind=success] { color:#9fe8b9; }
+.admin-toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin:0 0 12px; }
+.admin-list { display:grid; gap:12px; }
+.admin-list-item { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px; border:1px solid var(--m-border); border-radius:10px; }
+.admin-list-item__heading { display:grid; gap:5px; }
+.admin-list-item__heading strong { overflow-wrap:anywhere; }
+.admin-list-item__heading span { font-size:.83rem; }
+.admin-preview { margin-top:25px; border-top:1px solid var(--m-border); padding-top:16px; }
+.admin-preview h3 { color:var(--m-accent); font-size:.95rem; }
+.admin-footer { text-align:center; padding:25px; color:var(--m-muted); border-top:1px solid var(--m-border); font-size:.85rem; }
+/* Public news section inherits the page's surrounding layout without changing existing styles */
+.mogrino-board { box-sizing:border-box; margin:20px auto 36px; padding:clamp(20px,4vw,38px); color:var(--m-text); background:linear-gradient(145deg,#152033,#0d1625); border:1px solid #354258; border-radius:18px; width:min(100%,1100px); font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif; }
+.mogrino-board * { box-sizing:border-box; }
+.mogrino-board__kicker { margin:0 0 7px; }
+.mogrino-board__title { color:var(--m-text); margin:0; font-size:clamp(1.6rem,4vw,2.1rem); }
+.mogrino-board__intro { color:var(--m-muted); margin:8px 0 21px; }
+.mogrino-board__list { display:grid; gap:0; margin-top:22px; }
+.mogrino-board__item { padding:18px 0; border-bottom:1px solid #344158; }
+.mogrino-board__item:first-child { border-top:1px solid #344158; }
+.mogrino-board__meta { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:0 0 7px; font-size:.82rem; color:#b9c6d7; }
+.mogrino-board__pin { border-radius:6px; background:#4c3c24; color:#f1d496; padding:1px 8px; }
+.mogrino-board__link { display:block; color:var(--m-text)!important; text-decoration:none; font-weight:800; font-size:1.05rem; overflow-wrap:anywhere; }
+.mogrino-board__link:hover,.mogrino-board__return:hover { color:var(--m-accent)!important; }
+.mogrino-board__excerpt { color:var(--m-muted); margin:7px 0 0; font-size:.94rem; overflow-wrap:anywhere; }
+.mogrino-board__body { color:var(--m-text); line-height:1.92; margin:22px 0; white-space:pre-wrap; overflow-wrap:anywhere; }
+.mogrino-board__return { display:inline-block; margin-top:18px; text-decoration:none; color:var(--m-accent)!important; font-weight:700; }
+.mogrino-board__empty { color:var(--m-muted); }
+.mogrino-board--home { margin-top:10px; }
+@media(max-width:640px) { .admin-grid { grid-template-columns:1fr; } .admin-list-item { flex-direction:column; align-items:stretch; } .admin-toolbar { flex-wrap:wrap; } }

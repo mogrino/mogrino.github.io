@@ -13,6 +13,11 @@
   <link rel="canonical" href="https://mogrino.github.io/">
   <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
   <link rel="stylesheet" href="./assets/css/style.css?v=1.2">
+  <!-- Remove the home notice sidebar layout; let the news feed fill the container. -->
+  <style>
+    .home-news .notice-layout { display: block; }
+    .home-news .news-feed { width: 100%; max-width: none; min-width: 0; }
+  </style>
   <script src="./assets/js/content.js?v=20261123-6" defer></script>
   <script src="./assets/js/site.js?v=1.2" defer></script>
   <title>MOGRINO | 견습병 공식 정보센터</title>
@@ -42,12 +47,6 @@
     </div>
     <div class="notice-layout">
       <div class="news-feed" aria-label="최근 공지"><div id="home-featured"></div><div id="home-articles"></div></div>
-      <aside class="notice-side" aria-label="서비스 안내">
-        <div class="side-label"><span class="status-dot"></span> OFFICIAL CHANNEL</div>
-        <h3>꼭 필요한 안내를<br>한곳에서.</h3>
-        <p>업데이트, 이벤트, 운영 공지와 알려진 문제까지. 새로운 내용은 이곳에 먼저 정리합니다.</p>
-        <div class="notice-side-bottom"><span>《견습병》 운영 현황</span><strong data-status>정식 출시 준비 중</strong></div>
-      </aside>
     </div>
   </section>
   <section class="home-entry" aria-labelledby="home-entry-title">

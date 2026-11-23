@@ -1,5 +1,5 @@
 /*
- * MOGRINO / 견습병 홈페이지 버그 신고 Formspree 연결 (버튼 표시 수정 v2)
+ * MOGRINO / 견습병 홈페이지 버그 신고 Formspree 연결 (게임 버전 드롭다운 v3)
  * 설치: /bug/index.html의 </body> 직전에 아래 스크립트를 추가합니다.
  *   <script defer src="/assets/js/mogrino-bug-report-mail.js"></script>
  * Formspree에서 발급된 mzerkepj ID가 이미 설정된 파일입니다. ID를 바꿀 필요 없습니다.
@@ -39,7 +39,7 @@
     const areas = fields.filter(el => el.tagName.toLowerCase() === 'textarea');
 
     const titleField = find('input', ['어떤 오류가 발생했나요', 'bugTitle', 'bug-title', 'errorTitle']) || inputs[0];
-    const versionField = find('input', ['1.0.19', 'gameVersion', 'game-version']) || inputs[1];
+    let versionField = find('input', ['1.0.19', 'gameVersion', 'game-version']) || inputs[1];
     const deviceField = find('input', ['Galaxy S24', 'deviceModel', 'device-model']) || inputs[2];
     const stepsField = find('textarea', ['장비 창 열기', '오류 발생 순서', 'steps', 'sequence']) || areas[0];
     const detailField = find('textarea', ['실제 발생한 현상', '상세 내용', 'detail', 'description']) || areas[1];
@@ -48,6 +48,85 @@
         new Set([titleField, versionField, deviceField, stepsField, detailField]).size !== 5) {
       console.warn('[MOGRINO] 버그 신고 입력칸 매핑 실패. 오접수를 막기 위해 전송 기능을 활성화하지 않습니다.');
       return;
+    }
+
+    // 게임 버전을 텍스트 입력 대신 기본 화살표가 있는 <select>로 변경합니다.
+    // 기존 report-version ID / name=version을 유지하므로 form label 및 전송 데이터는 보존됩니다.
+    let versionOtherField = null;
+    if (versionField.tagName.toLowerCase() === 'input') {
+      const original = versionField;
+      const oldValue = original.value.trim();
+      const originalStyle = window.getComputedStyle(original);
+      const choices = [
+        ['', '게임 버전을 선택해 주세요'],
+        ['1.0.22', '1.0.22 (최신)'],
+        ['1.0.21', '1.0.21'],
+        ['1.0.20', '1.0.20'],
+        ['1.0.19', '1.0.19'],
+        ['__other__', '기타 버전 (직접 입력)'],
+        ['__unknown__', '게임 버전을 모르겠어요']
+      ];
+      const dropdown = document.createElement('select');
+      dropdown.id = original.id;
+      dropdown.name = original.name;
+      dropdown.className = original.className;
+      dropdown.setAttribute('aria-label', '게임 버전 선택');
+      for (const [value, label] of choices) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = label;
+        dropdown.append(option);
+      }
+      // 입력칸의 색상·높이·테두리를 계승하고, 화살표는 브라우저 기본 표시를 이용합니다.
+      dropdown.style.boxSizing = 'border-box';
+      dropdown.style.display = 'block';
+      dropdown.style.width = '100%';
+      dropdown.style.minWidth = '0';
+      dropdown.style.height = originalStyle.height;
+      dropdown.style.padding = originalStyle.padding;
+      dropdown.style.font = originalStyle.font;
+      dropdown.style.border = originalStyle.border;
+      dropdown.style.borderRadius = originalStyle.borderRadius;
+      dropdown.style.backgroundColor = originalStyle.backgroundColor;
+      dropdown.style.color = originalStyle.color;
+      dropdown.style.cursor = 'pointer';
+      dropdown.style.appearance = 'auto';
+      dropdown.style.webkitAppearance = 'menulist';
+
+      versionOtherField = document.createElement('input');
+      versionOtherField.id = 'report-version-other';
+      versionOtherField.type = 'text';
+      versionOtherField.name = 'version_other';
+      versionOtherField.placeholder = '게임 버전을 입력해 주세요. 예: 1.0.18';
+      versionOtherField.maxLength = 32;
+      versionOtherField.autocomplete = 'off';
+      versionOtherField.setAttribute('aria-label', '기타 게임 버전 입력');
+      versionOtherField.style.boxSizing = 'border-box';
+      versionOtherField.style.width = '100%';
+      versionOtherField.style.marginTop = '8px';
+      versionOtherField.style.display = 'none';
+      versionOtherField.disabled = true;
+
+      // 과거에 이미 입력된 값이 있다면 다른 버전 선택 시에도 사라지지 않게 합니다.
+      if (oldValue && choices.some(([v]) => v === oldValue)) dropdown.value = oldValue;
+      else if (oldValue) {
+        dropdown.value = '__other__';
+        versionOtherField.value = oldValue;
+      }
+      original.replaceWith(dropdown);
+      dropdown.insertAdjacentElement('afterend', versionOtherField);
+      versionField = dropdown;
+
+      const syncOtherInput = () => {
+        const isOther = dropdown.value === '__other__';
+        versionOtherField.style.display = isOther ? 'block' : 'none';
+        versionOtherField.disabled = !isOther;
+      };
+      dropdown.addEventListener('change', () => {
+        syncOtherInput();
+        if (dropdown.value === '__other__') versionOtherField.focus();
+      });
+      syncOtherInput();
     }
 
     // HTML 속성 값/label이나 다른 페이지 구조는 건드리지 않습니다.
@@ -94,7 +173,9 @@
 
     const getPayload = () => ({
       title: titleField.value.trim(),
-      version: versionField.value.trim(),
+      version: versionField.value === '__other__'
+        ? (versionOtherField?.value.trim() || '')
+        : (versionField.value === '__unknown__' ? '버전 모름' : versionField.value.trim()),
       device: deviceField.value.trim(),
       steps: stepsField.value.trim(),
       detail: detailField.value.trim()

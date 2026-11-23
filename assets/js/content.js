@@ -133,3 +133,75 @@ window.MOGRINO_CONTENT = {
   };
   document.head.appendChild(config);
 })();
+
+
+/*
+ * MOGRINO 메인 홈: OFFICIAL CHANNEL 카드 제거 + 최신 공지 카드 전체 너비 적용
+ * 적용 범위: / 와 /index.html 메인 화면에만 한정합니다.
+ * 기존 공지/가이드/Firebase/버그신고/건의사항 데이터는 변경하지 않습니다.
+ */
+(function mogrinoHomeNoticeFullWidth() {
+  var page = window.location.pathname;
+  if (page !== '/' && page !== '/index.html') return;
+
+  function isNoticeCard(el) {
+    if (!el || !el.textContent) return false;
+    // 정적 안내 카드 또는 Firebase가 삽입한 최신 공지 링크 식별.
+    if (el.querySelector('a[href*="/news/?post="],a[href*="?post="]')) return true;
+    var text = el.textContent;
+    return text.includes('새로운 소식을 준비하고 있습니다') ||
+           text.includes('추가 공지는 공지사항 메뉴에서 확인할 수 있습니다');
+  }
+
+  function updateLayout() {
+    var main = document.querySelector('main');
+    if (!main) return false;
+
+    var marker = Array.from(main.querySelectorAll('span,p,small,strong,b,h1,h2,h3,h4,div'))
+      .find(function (el) {
+        return el.children.length === 0 && el.textContent.trim().toUpperCase() === 'OFFICIAL CHANNEL';
+      });
+    if (!marker) return false;
+
+    // OFFICIAL CHANNEL이 포함된 요소를 바깥쪽으로 따라 올라가며
+    // '공지 카드 + 오른쪽 안내 카드'가 나란히 있는 실제 레이아웃 행을 찾습니다.
+    for (var right = marker; right && right !== main; right = right.parentElement) {
+      var row = right.parentElement;
+      if (!row || !main.contains(row)) break;
+      var siblings = Array.from(row.children).filter(function (el) { return el !== right; });
+      var notice = siblings.find(isNoticeCard);
+      if (!notice) continue;
+      // 오른쪽 안내 카드만 제거합니다. 섹션 제목과 공지 데이터는 그대로 둡니다.
+      right.remove();
+      // 이전 2열 그리드의 고정 열비율을 1열로 변경하여 하단 3개 카드의 전체 폭과 정렬합니다.
+      row.style.setProperty('display', 'grid', 'important');
+      row.style.setProperty('grid-template-columns', 'minmax(0, 1fr)', 'important');
+      row.style.setProperty('width', '100%', 'important');
+      row.style.setProperty('max-width', '100%', 'important');
+      notice.style.setProperty('grid-column', '1 / -1', 'important');
+      notice.style.setProperty('width', '100%', 'important');
+      notice.style.setProperty('max-width', 'none', 'important');
+      notice.style.setProperty('min-width', '0', 'important');
+      notice.style.setProperty('box-sizing', 'border-box', 'important');
+      row.setAttribute('data-mogrino-notice-fullwidth', '');
+      return true;
+    }
+    return false;
+  }
+
+  function begin() {
+    if (updateLayout()) return;
+    // 홈페이지 기본 스크립트가 메인 카드를 뒤늦게 구성하는 경우를 대비합니다.
+    var tries = 0;
+    var timer = window.setInterval(function () {
+      if (updateLayout() || ++tries >= 20) window.clearInterval(timer);
+    }, 250);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      window.setTimeout(begin, 0);
+    }, { once: true });
+  } else {
+    window.setTimeout(begin, 0);
+  }
+})();

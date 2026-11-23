@@ -1,5 +1,5 @@
 /*
- * MOGRINO / 견습병 홈페이지 버그 신고 Formspree 연결
+ * MOGRINO / 견습병 홈페이지 버그 신고 Formspree 연결 (버튼 표시 수정 v2)
  * 설치: /bug/index.html의 </body> 직전에 아래 스크립트를 추가합니다.
  *   <script defer src="/assets/js/mogrino-bug-report-mail.js"></script>
  * Formspree에서 발급된 mzerkepj ID가 이미 설정된 파일입니다. ID를 바꿀 필요 없습니다.
@@ -51,7 +51,7 @@
     }
 
     // HTML 속성 값/label이나 다른 페이지 구조는 건드리지 않습니다.
-    if ('value' in sendButton) sendButton.value = '버그 신고하기 ↗';
+    if (sendButton.tagName === 'INPUT') sendButton.value = '버그 신고하기 ↗';
     else sendButton.textContent = '버그 신고하기 ↗';
     sendButton.setAttribute('aria-label', '작성한 버그 신고 내용 이메일 접수');
     titleField.required = true;
@@ -118,7 +118,7 @@
     function setBusy(busy) {
       sendButton.disabled = busy;
       sendButton.setAttribute('aria-busy', String(busy));
-      if ('value' in sendButton) sendButton.value = busy ? '전송 중...' : '버그 신고하기 ↗';
+      if (sendButton.tagName === 'INPUT') sendButton.value = busy ? '전송 중...' : '버그 신고하기 ↗';
       else sendButton.textContent = busy ? '전송 중...' : '버그 신고하기 ↗';
     }
 

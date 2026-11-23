@@ -19,28 +19,7 @@ window.MOGRINO_CONTENT = {
     EVENT:  { label: '이벤트', badge: '이벤트' },
     DEV:    { label: '개발 소식', badge: '개발 소식' }
   },
-  news: [
-    {
-      id: 'release-preparation', date: '2026-11-22', category: 'NOTICE', pinned: true,
-      title: '《견습병》 정식 출시 준비 안내',
-      excerpt: '현재 Google Play 정식 출시를 준비하고 있습니다. 확정된 일정과 주요 변경 사항은 이곳에서 안내하겠습니다.',
-      body: [
-        { heading: '안내드립니다', text: '《견습병》은 현재 Google Play 정식 출시를 준비하고 있습니다. 정식 출시일은 아직 확정되지 않았습니다.' },
-        { heading: '공지 채널', text: '앞으로 게임 운영과 관련된 중요한 소식, 알려진 문제, 패치노트는 MOGRINO 공식 홈페이지의 공지사항 메뉴를 통해 전달하겠습니다.' },
-        { heading: '출시 관련 정보', text: '배포 일정이 확정되면 공식 홈페이지에 별도로 공지하겠습니다. 출시 전 내부 테스트 버전과 정식 출시 버전은 구분해서 안내합니다.' }
-      ]
-    },
-    {
-      id: 'site-guide', date: '2026-11-22', category: 'NOTICE', pinned: false,
-      title: 'MOGRINO 홈페이지 이용 안내',
-      excerpt: '공지사항, 가이드, 버그신고, 건의사항을 한눈에 찾을 수 있도록 홈페이지 메뉴를 정리했습니다.',
-      body: [
-        { heading: '새로운 홈페이지 구성', text: 'MOGRINO 홈페이지를 게임 이용자를 위한 정보센터 형태로 정리했습니다. 첫 화면에는 최신 공지와 소식을 가장 먼저 보여드립니다.' },
-        { heading: '이용 방법', text: '공지사항에서 운영 안내와 업데이트·이벤트 소식을 확인하고, 가이드에서 게임 이용 방법을 찾아보세요. 버그신고와 건의사항 페이지에서 내용을 작성할 수 있지만 실제 제출 창구는 아직 준비 중입니다.' },
-        { heading: '안내', text: '현재 홈페이지는 첫 번째 버전입니다. 게임 가이드와 지원 정보는 정식 서비스 내용에 맞춰 지속적으로 보완하겠습니다.' }
-      ]
-    }
-  ],
+  news: [],
   guides: [
     {
       id:'start', number:'01', icon:'compass', title:'처음 시작하기', subtitle:'기본 조작과 플레이 흐름', image:'battle.webp',

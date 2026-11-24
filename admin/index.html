@@ -43,6 +43,11 @@
             <label>게시 날짜 <span class="required">*</span><input id="post-date" name="date" type="date" required></label>
             <label>게시 상태<select id="post-status" name="status"><option value="draft">임시저장 (비공개)</option><option value="published">게시 (전체 공개)</option></select></label>
           </div>
+          <div id="release-fields" hidden>
+            <label class="admin-checkbox"><input id="post-register-release" type="checkbox"> 정식 게임 버전 목록에 등록</label>
+            <label>게임 버전 <small>(예: 1.0.23)</small><input id="post-release-version" type="text" maxlength="20" placeholder="1.0.23" autocomplete="off" disabled></label>
+            <p class="board-muted" style="margin:-6px 0 16px;font-size:.85rem;">업데이트 공지를 공개할 때만 버그 신고의 버전 목록에 반영됩니다. 실제 Google Play 배포를 확인한 뒤 공개하세요. 해당 공지를 삭제하거나 비공개로 전환하면 다른 공개 공지에 등록되지 않은 버전은 목록에서 빠집니다.</p>
+          </div>
           <label>목록에 보일 요약 <small>(비워두면 본문 첫 부분 사용)</small><textarea id="post-excerpt" name="excerpt" rows="2" maxlength="300" placeholder="공지 목록에 표시되는 짧은 설명"></textarea></label>
           <label>본문 <span class="required">*</span><textarea id="post-body" name="body" rows="12" maxlength="20000" required placeholder="공지사항 내용을 작성하세요. 줄바꿈은 게시글에서 그대로 유지됩니다."></textarea></label>
           <label class="admin-checkbox"><input id="post-pinned" type="checkbox"> 중요 공지로 상단 고정</label>
@@ -67,6 +72,6 @@
   </main>
   <footer class="admin-footer">MOGRINO · 공식 공지 관리 화면 (보안은 Firestore 규칙으로 제어)</footer>
   <script src="/assets/js/mogrino-firebase-config.js?v=20261123-2"></script>
-  <script type="module" src="/assets/js/mogrino-news-admin.js?v=20261123-2"></script>
+  <script type="module" src="/assets/js/mogrino-news-admin.js?v=20261124-release1"></script>
 </body>
 </html>

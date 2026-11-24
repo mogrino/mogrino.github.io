@@ -17,7 +17,7 @@
       <div class="form-heading"><span class="form-step">01</span><div><h2 id="feedback-form-title">버그신고 내용 작성</h2><p>작성한 내용을 복사하여 이용할 수 있습니다. 현재 홈페이지에서 서버로 직접 전송되지는 않습니다.</p></div></div>
       <form id="feedback-form" data-feedback-kind="bug">
        <div class="form-field"><label for="report-title">제목 <span class="required">필수</span></label><input id="report-title" name="title" placeholder="어떤 오류가 발생했나요?" maxlength="120" required></div>
-       <div class="form-row"><div class="form-field"><label for="report-version">게임 버전 <span class="field-hint">(선택)</span></label><input id="report-version" name="version" placeholder="예: 1.0.19" autocomplete="off"></div><div class="form-field"><label for="report-device">기기 모델 <span class="field-hint">(선택)</span></label><input id="report-device" name="device" placeholder="예: Galaxy S24" autocomplete="off"></div></div>
+       <div class="form-row"><div class="form-field"><label for="report-version">게임 버전 <span class="field-hint">(선택)</span></label><input id="report-version" name="version" placeholder="예: 1.0.22" autocomplete="off"></div><div class="form-field"><label for="report-device">기기 모델 <span class="field-hint">(선택)</span></label><input id="report-device" name="device" placeholder="예: Galaxy S24" autocomplete="off"></div></div>
 <div class="form-field"><label for="report-steps">오류 발생 순서 <span class="field-hint">(선택)</span></label><textarea id="report-steps" name="steps" placeholder="예: 1. 장비 창 열기 → 2. 강화 시도 → 3. 화면이 멈춤" rows="4"></textarea></div>
        <div class="form-field"><label for="report-body">상세 내용 <span class="required">필수</span></label><textarea id="report-body" name="body" placeholder="실제 발생한 현상과 예상했던 동작을 적어 주세요." rows="7" maxlength="5000" required></textarea></div>
        <div class="feedback-buttons"><button class="btn" type="submit">작성 내용 복사 ↗</button><a class="btn btn-outline" id="feedback-email" hidden>이메일로 보내기 ↗</a></div>
@@ -29,6 +29,7 @@
 </main>
 <footer class="site-footer"><div class="container"><div class="footer-row"><div><p class="footer-brand">MOGRINO</p><p class="footer-text">《견습병》 공식 공지 · 가이드 · 의견 안내</p></div><div class="footer-links"><a href="../index.html">홈</a><a href="../news/index.html">공지사항</a><a href="../guide/index.html">가이드</a><a href="../bug/index.html">버그신고</a><a href="../suggestions/index.html">건의사항</a><a href="../support/index.html">FAQ</a><a data-privacy href="https://sites.google.com/view/mogrino-privacy" target="_blank" rel="noopener noreferrer">개인정보처리방침 ↗</a></div></div><div class="footer-bottom"><span>© <span data-year>2026</span> MOGRINO. All rights reserved.</span><span>본 페이지의 안내는 게임 서비스 내용에 따라 갱신될 수 있습니다.</span></div></div></footer>
 <noscript><div style="padding:12px;background:#e5be75;color:#192233;text-align:center">작성 내용 복사 기능을 사용하려면 JavaScript가 필요합니다.</div></noscript>
-<script defer src="/assets/js/mogrino-bug-report-mail.js?v=20261123-3"></script>
+<script defer src="/assets/js/mogrino-firebase-config.js?v=20261123-2"></script>
+<script defer src="/assets/js/mogrino-bug-report-mail.js?v=20261124-release1"></script>
 </body>
 </html>

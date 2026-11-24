@@ -2,6 +2,8 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from
 import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, serverTimestamp } from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
 import { app, db, configured, NEWS_COLLECTION, CATEGORIES, dateTodayKST, sortPosts, make } from './mogrino-news-core.js';
 
+import { FIRST_RELEASE, isReleaseVersion } from './mogrino-release-versions.js?v=20261124-release1';
+
 const $ = id => document.getElementById(id);
 const loginBox = $('login-box');
 const dashboard = $('dashboard');
@@ -30,9 +32,21 @@ function setBusy(isBusy) {
   working = isBusy;
   for (const button of document.querySelectorAll('#dashboard button')) button.disabled = isBusy;
 }
+function syncReleaseFields() {
+  const isUpdate = $('post-category').value === 'UPDATE';
+  const enabled = isUpdate && $('post-register-release').checked;
+  $('release-fields').hidden = !isUpdate;
+  $('post-register-release').disabled = !isUpdate;
+  $('post-release-version').disabled = !enabled;
+  $('post-release-version').required = enabled;
+}
+$('post-category').addEventListener('change', syncReleaseFields);
+$('post-register-release').addEventListener('change', syncReleaseFields);
+
 function resetEditor() {
   editingId = null;
   form.reset();
+  syncReleaseFields();
   $('post-date').value = dateTodayKST();
   $('post-status').value = 'draft';
   $('editor-title').textContent = '새 공지 작성';
@@ -48,6 +62,9 @@ function fillEditor(post) {
   $('post-body').value = post.body || '';
   $('post-status').value = post.status === 'published' ? 'published' : 'draft';
   $('post-pinned').checked = Boolean(post.pinned);
+  $('post-register-release').checked = post.category === 'UPDATE' && isReleaseVersion(post.releaseVersion);
+  $('post-release-version').value = post.releaseVersion || '';
+  syncReleaseFields();
   $('editor-title').textContent = '공지 수정';
   $('save-post').textContent = '수정 내용 저장';
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -62,7 +79,7 @@ function renderList() {
     const item = make('article', 'admin-list-item');
     const heading = make('div', 'admin-list-item__heading');
     const title = make('strong', '', post.title || '(제목 없음)');
-    const meta = make('span', 'board-muted', `${post.date || ''} · ${CATEGORIES[post.category] || '공지'} · ${post.status === 'published' ? '게시 중' : '임시저장'}${post.pinned ? ' · 고정' : ''}`);
+    const meta = make('span', 'board-muted', `${post.date || ''} · ${CATEGORIES[post.category] || '공지'} · ${post.status === 'published' ? '게시 중' : '임시저장'}${post.pinned ? ' · 고정' : ''}${post.category === 'UPDATE' && isReleaseVersion(post.releaseVersion) ? ` · 게임 v${post.releaseVersion}` : ''}`);
     heading.append(title, meta);
     const actions = make('div', 'admin-actions');
     const edit = make('button', 'btn btn-subtle', '수정');
@@ -162,14 +179,28 @@ form.addEventListener('submit', async e => {
     excerpt: $('post-excerpt').value.trim(),
     body: $('post-body').value.trim(),
     pinned: $('post-pinned').checked,
-    status: $('post-status').value
+    status: $('post-status').value,
+    releaseVersion: $('post-category').value === 'UPDATE' && $('post-register-release').checked
+      ? $('post-release-version').value.trim() : ''
   };
   if (!payload.title || !payload.body || !/^\d{4}-\d{2}-\d{2}$/.test(payload.date)) {
     showMessage(info, '제목·날짜·본문을 확인해 주세요.', 'error'); return;
   }
+  if ($('post-category').value === 'UPDATE' && $('post-register-release').checked &&
+      !isReleaseVersion(payload.releaseVersion)) {
+    showMessage(info, `게임 버전은 ${FIRST_RELEASE} 이상의 숫자 3자리 형식(예: 1.0.23)으로 입력해 주세요.`, 'error');
+    $('post-release-version').focus();
+    return;
+  }
   if (!payload.excerpt) payload.excerpt = payload.body.replace(/\s+/g, ' ').slice(0, 140);
   if (!CATEGORIES[payload.category]) payload.category = 'NOTICE';
   if (!['draft', 'published'].includes(payload.status)) payload.status = 'draft';
+  const previous = posts.find(p => p.id === editingId);
+  if (payload.status === 'published' && payload.releaseVersion &&
+      (previous?.status !== 'published' || previous?.releaseVersion !== payload.releaseVersion ||
+       previous?.category !== 'UPDATE')) {
+    if (!window.confirm(`게임 v${payload.releaseVersion}을 정식 버전 목록에 등록하고 공지를 공개할까요?\nGoogle Play에서 실제 배포된 버전인지 확인해 주세요.`)) return;
+  }
   setBusy(true);
   showMessage(info, '저장 중입니다…');
   try {

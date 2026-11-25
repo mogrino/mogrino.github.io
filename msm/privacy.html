@@ -283,5 +283,121 @@ authorization revocation, retention and deletion apply.
     and deletion apply.
   </p>
 </section>
+<section lang="ko">
+  <h2>Google Play Developer API 데이터 처리</h2>
 
+  <p>업데이트: 2026년 11월 25일</p>
+
+  <p>
+    MSM은 게임 상품 및 출시 관리 정보를 확인하기 위해
+    Google Play Developer API에 대한 접근 권한을 요청합니다.
+    실제 데이터 접근은 승인된 운영자가 접근할 수 있는 앱의
+    운영 관리 정보로 제한됩니다.
+  </p>
+
+  <ul>
+    <li>앱 및 패키지 식별 정보</li>
+    <li>인앱 상품 ID, 상품명 및 상품 설명</li>
+    <li>상품 판매 상태 및 구매 옵션</li>
+    <li>국가 및 지역별 상품 가격과 통화 정보</li>
+    <li>지원되는 앱 버전 및 버전 코드 정보</li>
+    <li>지원되는 배포 트랙 및 출시 상태 정보</li>
+    <li>운영 정보의 조회 및 갱신 시각</li>
+  </ul>
+
+  <p>
+    수집한 데이터는 상품 정보 관리, 가격 검증,
+    게임 버전 및 출시 상태 확인,
+    내부 운영 보고서 생성을 위해 사용합니다.
+  </p>
+
+  <p>
+    Google Play Developer API의 OAuth 범위는
+    변경 작업을 지원할 수 있지만,
+    현재 MSM의 연동 기능은 읽기 전용 조회로 제한합니다.
+    MSM은 이 연동을 통해 상품 생성, 상품 가격 변경,
+    구매 승인, 구매 취소, 환불 실행,
+    앱 업로드 또는 앱 출시를 수행하지 않습니다.
+  </p>
+
+  <p>
+    이번 연동 기능에서는 개별 이용자의 이름,
+    이메일 주소, 결제 수단, 구매 토큰,
+    개별 주문 식별자 및 사용자 리뷰를 수집하지 않습니다.
+  </p>
+
+  <p>
+    데이터는 Google Apps Script에서 처리하며
+    접근이 제한된 운영 전용 Google Sheets 및
+    Google Drive에 저장합니다.
+    Google API 데이터를 판매하거나 광고 타기팅,
+    신용 평가 또는 범용 AI 모델 학습에 사용하지 않습니다.
+  </p>
+
+  <p>
+    데이터 공유, 보호, 보관, 권한 철회 및 삭제에는
+    본 개인정보처리방침의 기존 조항이 적용됩니다.
+  </p>
+</section>
+
+<section lang="en">
+  <h2>Google Play Developer API Data Processing</h2>
+
+  <p>Updated: November 25, 2026</p>
+
+  <p>
+    MSM requests access to the Google Play Developer API
+    to monitor game product and release management information.
+    Actual data access is limited to operational information
+    for apps that the authorized operator has permission
+    to access.
+  </p>
+
+  <ul>
+    <li>App and package identifiers</li>
+    <li>In-app product IDs, titles and descriptions</li>
+    <li>Product availability and purchase options</li>
+    <li>Regional product prices and currencies</li>
+    <li>Supported app version names and version codes</li>
+    <li>Supported distribution tracks and release status information</li>
+    <li>Operational data retrieval and update timestamps</li>
+  </ul>
+
+  <p>
+    Data is used for product information management,
+    price verification, app version and release monitoring,
+    and internal operational reporting.
+  </p>
+
+  <p>
+    Although the Google Play Developer API OAuth scope
+    may support modification operations, MSM currently
+    restricts this integration to read-only queries.
+    MSM does not create products, modify prices,
+    acknowledge or cancel purchases, issue refunds,
+    upload apps or publish apps through this integration.
+  </p>
+
+  <p>
+    This integration does not collect individual users'
+    names, email addresses, payment methods,
+    purchase tokens, individual order identifiers
+    or user reviews.
+  </p>
+
+  <p>
+    Data is processed using Google Apps Script and
+    stored in access-restricted operational Google
+    Sheets and Google Drive files.
+    Google API data is not sold or used for advertising
+    targeting, credit assessment or training
+    general-purpose AI models.
+  </p>
+
+  <p>
+    Existing provisions regarding data sharing,
+    protection, retention, authorization revocation
+    and deletion apply.
+  </p>
+</section>
 </main><footer><div class="wrap"><div class="links"><a href="index.html">MSM 소개</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="mailto:mogeulino@gmail.com">Contact</a><a href="https://mogrino.github.io/">MOGRINO Studio</a></div>© 2026 MOGRINO Studio</div></footer></body></html>
